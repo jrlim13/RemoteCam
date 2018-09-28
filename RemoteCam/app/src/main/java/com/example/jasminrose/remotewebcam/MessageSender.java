@@ -1,6 +1,7 @@
 package com.example.jasminrose.remotewebcam;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,8 +9,8 @@ import java.net.Socket;
 
 public class MessageSender extends AsyncTask<String, Void, String> {
 
-    Socket s;
-    PrintWriter pw;
+    private Socket s;
+    private PrintWriter pw;
 
     @Override
     protected String doInBackground(String... strings) {
@@ -17,7 +18,7 @@ public class MessageSender extends AsyncTask<String, Void, String> {
         String value = strings[0];
 
         try {
-            s = new Socket("192.168.0.9", 4444);
+            s = new Socket("192.168.43.110", 4444);
             pw = new PrintWriter(s.getOutputStream());
             pw.write(value);
             pw.flush();
@@ -29,5 +30,4 @@ public class MessageSender extends AsyncTask<String, Void, String> {
 
         return null;
     }
-
 }

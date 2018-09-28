@@ -31,7 +31,7 @@ public class WebcamServer {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Server Listening......");
         try {
             ss = new ServerSocket(4444);
@@ -43,10 +43,11 @@ public class WebcamServer {
                     Webcam webcam = Webcam.getDefault();
                     webcam.setViewSize(new Dimension(640, 480));
                     webcam.open();
+                    Thread.sleep(1000);
                     String fileName = String.format("picture-%d.png", Calendar.getInstance().getTimeInMillis());
                     ImageIO.write(webcam.getImage(), "PNG", new File(fileName));
                     System.out.println("Picture captured");
-                    webcam.close();
+                    webcam.close();       
                 }
             }
         } catch (WebcamException | IOException e) {
